@@ -5,7 +5,7 @@ module Junction
     module Components
       module Issues
         # Table of issues for a repository.
-        class IssuesTable < ::Components::Base
+        class IssuesTable < Junction::Components::Base
           # Initialize a new component.
           #
           # @param entity [ApplicationRecord] The entity the repository is related
@@ -20,7 +20,7 @@ module Junction
 
           def view_template
             Components::RepoTableHeader(entity: @entity, path: "issues")
-            ::Components::Table(**attrs) do |table|
+            Table(**attrs) do |table|
               table.header do |header|
                 header.row do |row|
                   row.cell { "Title" }

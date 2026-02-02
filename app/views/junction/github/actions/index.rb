@@ -5,7 +5,7 @@ module Junction
     # Displays a list of GitHub Actions workflows for a given entity.
     #
     # @todo Implement search, filtering, refresh, and pagination.
-    class Views::Actions::Index < ::Components::Base
+    class Views::Actions::Index < Junction::Components::Base
       def initialize(entity:, workflow_runs:, frame_id:)
         @entity = entity
         @workflow_runs = workflow_runs

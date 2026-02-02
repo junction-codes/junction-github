@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 8.1"
   spec.add_dependency "octokit", "~> 10.0"
+  spec.add_dependency "omniauth-github", "~> 2.0"
 end

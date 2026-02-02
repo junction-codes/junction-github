@@ -22,7 +22,7 @@ module Junction
           end
 
           def view_template
-            ::Components::Link(**attrs) do
+            Link(**attrs) do
               icon(@icon, class: "mr-2 h-4 w-4")
               plain @title
             end

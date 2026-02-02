@@ -5,7 +5,7 @@ module Junction
     # Displays a list of GitHub issues for a given entity.
     #
     # @todo Implement search, filtering, refresh, and pagination.
-    class Views::Issues::Index < ::Components::Base
+    class Views::Issues::Index < Junction::Components::Base
       def initialize(entity:, frame_id:, issues:)
         @entity = entity
         @frame_id = frame_id

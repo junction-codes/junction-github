@@ -5,7 +5,7 @@ module Junction
     module Components
       class OpenPrStatCard < Base
         def template
-          render ::Components::StatCard.new(
+          render StatCard.new(
             title: "Open Pull Requests",
             value:,
             status:,

@@ -9,7 +9,7 @@ module Junction
           DEFAULT_ATTRS = { class: "h-full" }.freeze
 
           def view_template
-            ::Components::Card(**attrs) do |card|
+            Card(**attrs) do |card|
               ProfileCardHeader(entity:, user:)
 
               card.content do

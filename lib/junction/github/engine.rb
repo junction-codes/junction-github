@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "junction-codes"
+require "omniauth-github"
+
 module Junction
   module Github
     class Engine < ::Rails::Engine
@@ -14,14 +17,14 @@ module Junction
       isolate_namespace Junction::Github
 
       ActiveSupport.on_load(:junction_plugins) do
-        plugin = Plugin.new("github", Junction::Github, icon: "github", title: "GitHub")
+        plugin = Junction::Plugin.new("github", Junction::Github, icon: "github", title: "GitHub")
         plugin.auth_provider ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"], callback: ->(auth) {
           User.find_by(annotations: { ANNOTATION_USER_LOGIN => auth.info.nickname })
         }
 
-        %w[Api Component].each do |context|
+        %w[Junction::Api Junction::Component].each do |context|
           plugin.for_entity context, HAS_PROJECT_SLUG do |entity|
-            name = context.to_s.downcase
+            name = context.to_s.demodulize.downcase
             entity.annotation key: ANNOTATION_PROJECT_SLUG,
                               title: "GitHub Repository Slug",
                               placeholder: "my-org/my-repo"
@@ -49,7 +52,7 @@ module Junction
           end
         end
 
-        plugin.for_entity "Group", HAS_TEAM_SLUG do |entity|
+        plugin.for_entity "Junction::Group", HAS_TEAM_SLUG do |entity|
           entity.annotation key: ANNOTATION_TEAM_SLUG,
                             title: "GitHub Team Slug",
                             placeholder: "my-org/my-team"
@@ -63,7 +66,7 @@ module Junction
           entity.component slot: :group_profile_cards, component: "Components::Teams::ProfileCard"
         end
 
-        plugin.for_entity "User", HAS_USER_LOGIN do |entity|
+        plugin.for_entity "Junction::User", HAS_USER_LOGIN do |entity|
           entity.annotation key: ANNOTATION_USER_LOGIN,
                             title: "GitHub Username",
                             placeholder: "benderbendingrodriguez"

@@ -4,7 +4,7 @@ module Junction
   module Github
     module Components
       # Header for a table showing GitHub repository information.
-      class RepoTableHeader < ::Components::Base
+      class RepoTableHeader < Junction::Components::Base
         DEFAULT_ATTRS = { class: "p-5 flex items-center" }.freeze
 
         # Initialize a new component.

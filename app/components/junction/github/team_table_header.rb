@@ -4,7 +4,7 @@ module Junction
   module Github
     module Components
       # Header for a table showing GitHub team information.
-      class TeamTableHeader < ::Components::Base
+      class TeamTableHeader < Junction::Components::Base
         DEFAULT_ATTRS = { class: "p-5 flex items-center" }.freeze
 
         # Initialize a new component.

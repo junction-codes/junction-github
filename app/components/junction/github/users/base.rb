@@ -7,23 +7,16 @@ module Junction
         # Base class for user related components.
         #
         # @abstract
-        class Base < ::Components::Base
+        class Base < Junction::Components::Base
           attr_reader :entity
 
           # Initialize a new component.
           #
-          # `object` is deprecated but is still supported for compatibility. You
-          # should not rely on this parameter, and instead use `entity`.
-          #
-          # @param object [ApplicationRecord] The entity representing the user.
           # @param entity [ApplicationRecord] The entity representing the user.
           # @param user [Hash] The GitHub user data, if already loaded.
           # @param user_attrs [Hash] Additional attributes for the component.
-          #
-          # @todo Require `entity` instead of `object` once all components have been updated.
-          def initialize(object: nil, entity: nil, user: nil, **user_attrs)
-            @entity = entity || object
-            raise ArgumentError, "Entity is required" unless @entity
+          def initialize(entity:, user: nil, **user_attrs)
+            @entity = entity
 
             @user = user
             super(**user_attrs)
