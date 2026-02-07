@@ -4,7 +4,7 @@ module Junction
   module Github
     module Components
       # Renders a link to a GitHub user's profile with their avatar.
-      class GithubUserLink < ::Components::Base
+      class GithubUserLink < Junction::Components::Base
         # Initialize a new component.
         #
         # @param user [Hash] The user to render a link for.

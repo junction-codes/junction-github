@@ -5,7 +5,7 @@ module Junction
     module Components
       class OpenIssuesStatCard < Base
         def template
-          render ::Components::StatCard.new(
+          render StatCard.new(
             title: "Open Issues",
             value:,
             status:,

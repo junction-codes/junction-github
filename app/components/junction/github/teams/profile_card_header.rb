@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Junction::Github::Components::Teams::ProfileCardHeader
 module Junction
   module Github
     module Components
@@ -7,7 +8,7 @@ module Junction
         # Render the header section of a GitHub team profile card.
         class ProfileCardHeader < Base
           def view_template
-            ::Components::CardHeader(**attrs) do
+            CardHeader(**attrs) do
               div(class: "flex items-center gap-4") do
                 img(src: team.organization.avatar_url, alt: team.name,
                     class: "h-12 w-12 rounded-full border bg-muted")

@@ -5,7 +5,7 @@ module Junction
     module Components
       module Actions
         # Table of actions for a repository.
-        class WorkflowRunsTable < ::Components::Base
+        class WorkflowRunsTable < Junction::Components::Base
           # Initialize a new component.
           #
           # @param entity [ApplicationRecord] The entity the repository is related to.
@@ -19,7 +19,7 @@ module Junction
 
           def view_template
             Components::RepoTableHeader(entity: @entity, path: "actions")
-            ::Components::Table(**attrs) do |table|
+            Table(**attrs) do |table|
               table.header do |header|
                 header.row do |row|
                   row.cell { "Message" }

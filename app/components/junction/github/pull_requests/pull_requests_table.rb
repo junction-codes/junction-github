@@ -5,7 +5,7 @@ module Junction
     module Components
       module PullRequests
         # Table of pull requests for a repository.
-        class PullRequestsTable < ::Components::Base
+        class PullRequestsTable < Junction::Components::Base
           # Initialize a new component.
           #
           # @param entity [ApplicationRecord] The entity the repository is related
@@ -20,7 +20,7 @@ module Junction
 
           def view_template
             header
-            ::Components::Table(**attrs) do |table|
+            Table(**attrs) do |table|
               table.header do |header|
                 header.row do |row|
                   row.cell { "Title" }

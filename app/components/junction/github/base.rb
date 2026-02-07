@@ -3,9 +3,9 @@
 module Junction
   module Github
     module Components
-      class Base < ::Components::Base
-        def initialize(object:, **user_attrs)
-          @entity = object
+      class Base < Junction::Components::Base
+        def initialize(entity:, **user_attrs)
+          @entity = entity
 
           super(**user_attrs)
         end

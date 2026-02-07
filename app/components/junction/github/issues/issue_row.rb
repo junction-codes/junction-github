@@ -5,7 +5,7 @@ module Junction
     module Components
       module Issues
         # Individual table row for a repository issue.
-        class IssueRow < ::Components::Base
+        class IssueRow < Junction::Components::Base
           # Initialize a new component.
           #
           # @param issue [Hash] Issue to render.
@@ -18,7 +18,7 @@ module Junction
           end
 
           def view_template
-            ::Components::TableRow(**attrs) do |row|
+            TableRow(**attrs) do |row|
               row.cell do
                 div(class: "flex items-center space-x-4") do
                   div(class: "h-12 w-12 rounded-md bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0") do
@@ -46,11 +46,11 @@ module Junction
               end
 
               row.cell do
-                render ::Components::RelativeTime.new(time: @issue.created_at)
+                render RelativeTime.new(time: @issue.created_at)
               end
 
               row.cell do
-                render ::Components::RelativeTime.new(time: @issue.updated_at)
+                render RelativeTime.new(time: @issue.updated_at)
               end
 
               row.cell(class: "text-right") { @issue.comments }

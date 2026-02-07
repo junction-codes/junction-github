@@ -5,7 +5,7 @@ module Junction
     module Components
       module PullRequests
         # Individual table row for a repository pull request.
-        class PullRequestRow < ::Components::Base
+        class PullRequestRow < Junction::Components::Base
           ICON_CLOSED = %w[git-pull-request-closed text-alert].freeze
           ICON_MERGED = %w[git-pull-request text-purple-500].freeze
           ICON_OPEN = %w[git-pull-request-arrow text-success].freeze
@@ -21,7 +21,7 @@ module Junction
           end
 
           def view_template
-            ::Components::TableRow(**attrs) do |row|
+            TableRow(**attrs) do |row|
               row.cell do
                 div(class: "flex items-center space-x-4") do
                   div(class: "h-12 w-12 rounded-md bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0") do
@@ -42,11 +42,11 @@ module Junction
 
               row.cell { Components::GithubUserLink(user: @pull_request.user) }
               row.cell do
-                render ::Components::RelativeTime.new(time: @pull_request.created_at)
+                render RelativeTime.new(time: @pull_request.created_at)
               end
 
               row.cell do
-                render ::Components::RelativeTime.new(time: @pull_request.updated_at)
+                render RelativeTime.new(time: @pull_request.updated_at)
               end
             end
           end

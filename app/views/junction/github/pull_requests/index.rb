@@ -5,7 +5,7 @@ module Junction
     # Displays a list of GitHub pull requests for a given entity.
     #
     # @todo Implement search, filtering, refresh, and pagination.
-    class Views::PullRequests::Index < ::Components::Base
+    class Views::PullRequests::Index < Junction::Components::Base
       def initialize(entity:, pull_requests:, frame_id:)
         @entity = entity
         @pull_requests = pull_requests

@@ -5,7 +5,7 @@ module Junction
     module Components
       module Actions
         # Individual table row for a repository workflow run.
-        class WorkflowRunRow < ::Components::Base
+        class WorkflowRunRow < Junction::Components::Base
           DEFAULT_COLOR = "text-gray-500"
           CONCLUSION_COLORS = {
             "action_required" => "text-alert",
@@ -41,7 +41,7 @@ module Junction
           end
 
           def view_template
-            ::Components::TableRow(**attrs) do |row|
+            TableRow(**attrs) do |row|
               row.cell do
                 div(class: "flex items-center space-x-4") do
                   div(class: "h-12 w-12 rounded-md bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0") do

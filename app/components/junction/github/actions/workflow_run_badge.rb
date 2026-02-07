@@ -5,7 +5,7 @@ module Junction
     module Components
       module Actions
         # Badge for a GitHub Actions workflow run.
-        class WorkflowRunBadge < ::Components::Base
+        class WorkflowRunBadge < Junction::Components::Base
           WORKFLOW_CONCLUSION_DEFAULT = :neutral
           WORKFLOW_CONCLUSION_VARIANTS = {
             "action_required" => :danger,
@@ -42,7 +42,7 @@ module Junction
           end
 
           def view_template
-            ::Components::Badge(variant:, **attrs) do
+            Badge(variant:, **attrs) do
               (@workflow_run.conclusion || @workflow_run.status).capitalize
             end
           end
