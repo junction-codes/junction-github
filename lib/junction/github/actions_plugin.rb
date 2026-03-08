@@ -25,7 +25,8 @@ module Junction
                        controller: "junction/github/#{context.pluralize}",
                        action: "actions"
           scope.tab title: "CI/CD", icon: "workflow",
-                    action: :"#{context}_github_actions_path"
+                    action: :"#{context}_github_actions_path",
+                    access: { action: :show?, with: "ActionPolicy" }
         end
       end
     end

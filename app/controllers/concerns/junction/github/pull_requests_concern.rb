@@ -11,7 +11,7 @@ module Junction
       end
 
       def pull_requests
-        authorize! @entity, to: :show?
+        authorize! @entity, with: PullRequestPolicy, to: :show?
         render Junction::Github::Views::PullRequests::Index.new(
           entity: @entity,
           pull_requests: service.pull_requests,

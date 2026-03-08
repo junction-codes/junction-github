@@ -11,7 +11,7 @@ module Junction
       end
 
       def issues
-        authorize! @entity, to: :show?
+        authorize! @entity, with: IssuePolicy, to: :show?
         render Junction::Github::Views::Issues::Index.new(
           entity: @entity,
           issues: RepositoryService.new(slug:).issues,

@@ -21,7 +21,8 @@ module Junction
                        controller: "junction/github/#{context.pluralize}",
                        action: "issues"
           scope.tab title: "Issues", icon: "bug",
-                    action: :"#{context}_github_issues_path"
+                    action: :"#{context}_github_issues_path",
+                    access: { action: :show?, with: "IssuePolicy" }
 
           scope.component slot: :overview_cards, component: "Components::OpenIssuesStatCard"
         end

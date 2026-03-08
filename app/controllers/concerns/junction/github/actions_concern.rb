@@ -11,7 +11,7 @@ module Junction
       end
 
       def actions
-        authorize! @entity, to: :show?
+        authorize! @entity, with: ActionPolicy, to: :show?
         render Junction::Github::Views::Actions::Index.new(
           entity: @entity,
           workflow_runs: RepositoryService.new(slug:).workflow_runs,

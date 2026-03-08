@@ -21,7 +21,8 @@ module Junction
                        controller: "junction/github/#{context.pluralize}",
                        action: "pull_requests"
           scope.tab title: "Merge Requests", icon: "git-pull-request-arrow",
-                    action: :"#{context}_github_pull_requests_path"
+                    action: :"#{context}_github_pull_requests_path",
+                    access: { action: :show?, with: "PullRequestPolicy" }
 
           scope.component slot: :overview_cards, component: "Components::OpenPrStatCard"
         end
@@ -32,7 +33,8 @@ module Junction
                      controller: "junction/github/groups",
                      action: "pull_requests"
         scope.tab title: "Merge Requests", icon: "git-pull-request-arrow",
-                  action: :group_github_pull_requests_path
+                  action: :group_github_pull_requests_path,
+                  access: { action: :show?, with: "PullRequestPolicy" }
 
         scope.component slot: :group_profile_cards, component: "Components::Teams::ProfileCard"
       end
