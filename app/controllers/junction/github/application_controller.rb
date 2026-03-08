@@ -15,16 +15,6 @@ module Junction
       def frame_id(suffix)
         "#{entity_key.to_s.sub(/_id\z/, '')}-#{suffix}"
       end
-
-      # Retrieve the appropriate slug annotation based on the entity type.
-      #
-      # @return [String] The slug annotation value, if present.
-      def slug
-        @entity.annotations.fetch(
-          context == Group ? Engine::ANNOTATION_TEAM_SLUG : Engine::ANNOTATION_PROJECT_SLUG,
-          nil
-        )
-      end
     end
   end
 end
