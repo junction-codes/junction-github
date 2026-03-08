@@ -2,6 +2,10 @@
 
 require "junction-codes"
 require "omniauth-github"
+require "junction/github/core_plugin"
+require "junction/github/actions_plugin"
+require "junction/github/issues_plugin"
+require "junction/github/pull_requests_plugin"
 
 module Junction
   module Github
@@ -10,6 +14,8 @@ module Junction
       ANNOTATION_TEAM_SLUG = "github.com/team-slug"
       ANNOTATION_USER_LOGIN = "github.com/user-login"
 
+      DOMAIN = "github.com"
+
       HAS_PROJECT_SLUG = ->(context:) { context.annotations[ANNOTATION_PROJECT_SLUG].present? }.freeze
       HAS_TEAM_SLUG = ->(context:) { context.annotations[ANNOTATION_TEAM_SLUG].present? }.freeze
       HAS_USER_LOGIN = ->(context:) { context.annotations[ANNOTATION_USER_LOGIN].present? }.freeze
@@ -17,64 +23,10 @@ module Junction
       isolate_namespace Junction::Github
 
       ActiveSupport.on_load(:junction_plugins) do
-        plugin = Junction::Plugin.new("github", Junction::Github, icon: "github", title: "GitHub")
-        plugin.auth_provider ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"], callback: ->(auth) {
-          User.find_by(annotations: { ANNOTATION_USER_LOGIN => auth.info.nickname })
-        }
-
-        %w[Junction::Api Junction::Component].each do |context|
-          plugin.for_entity context, HAS_PROJECT_SLUG do |entity|
-            name = context.to_s.demodulize.downcase
-            entity.annotation key: ANNOTATION_PROJECT_SLUG,
-                              title: "GitHub Repository Slug",
-                              placeholder: "my-org/my-repo"
-
-            entity.action method: :"#{name}_github_actions_path",
-                          controller: "junction/github/actions",
-                          action: "index"
-            entity.tab title: "CI/CD", icon: "workflow",
-                        action: :"#{name}_github_actions_path"
-
-            entity.action method: :"#{name}_github_issues_path",
-                          controller: "junction/github/issues",
-                          action: "index"
-            entity.tab title: "Issues", icon: "bug",
-                        action: :"#{name}_github_issues_path"
-
-            entity.action method: :"#{name}_github_pull_requests_path",
-                          controller: "junction/github/pull_requests",
-                          action: "index"
-            entity.tab title: "Merge Requests", icon: "git-pull-request-arrow",
-                        action: :"#{name}_github_pull_requests_path"
-
-            entity.component slot: :overview_cards, component: "Components::OpenPrStatCard"
-            entity.component slot: :overview_cards, component: "Components::OpenIssuesStatCard"
-          end
-        end
-
-        plugin.for_entity "Junction::Group", HAS_TEAM_SLUG do |entity|
-          entity.annotation key: ANNOTATION_TEAM_SLUG,
-                            title: "GitHub Team Slug",
-                            placeholder: "my-org/my-team"
-
-          entity.action method: :"group_github_pull_requests_path",
-                        controller: "junction/github/pull_requests",
-                        action: "index"
-          entity.tab title: "Merge Requests", icon: "git-pull-request-arrow",
-                      action: :"group_github_pull_requests_path"
-
-          entity.component slot: :group_profile_cards, component: "Components::Teams::ProfileCard"
-        end
-
-        plugin.for_entity "Junction::User", HAS_USER_LOGIN do |entity|
-          entity.annotation key: ANNOTATION_USER_LOGIN,
-                            title: "GitHub Username",
-                            placeholder: "benderbendingrodriguez"
-
-          entity.component slot: :user_profile_cards, component: "Components::Users::ProfileCard"
-        end
-
-        plugin.register
+        Junction::Github::CorePlugin.register
+        Junction::Github::ActionsPlugin.register
+        Junction::Github::IssuesPlugin.register
+        Junction::Github::PullRequestsPlugin.register
       end
     end
   end

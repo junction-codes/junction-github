@@ -2,10 +2,16 @@
 
 module Junction
   module Github
-    class IssuesController < ApplicationController
-      before_action :set_entity
+    # Shared controller behavior for GitHub issues.
+    module IssuesConcern
+      extend ActiveSupport::Concern
 
-      def index
+      included do
+        before_action :set_entity
+      end
+
+      def issues
+        authorize! @entity, to: :show?
         render Junction::Github::Views::Issues::Index.new(
           entity: @entity,
           issues: RepositoryService.new(slug:).issues,
