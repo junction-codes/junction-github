@@ -18,7 +18,7 @@ module Junction
           end
 
           def view_template
-            TableRow(**attrs) do |row|
+            Table::Row(**attrs) do |row|
               row.cell do
                 div(class: "flex items-center space-x-4") do
                   div(class: "h-12 w-12 rounded-md bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0") do

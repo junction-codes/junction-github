@@ -6,7 +6,7 @@ module Junction
     class PullRequestsPlugin < ApplicationPlugin
       domain CorePlugin::DOMAIN
       description "GitHub Pull Requests integration for Junction"
-      icon "github"
+      icon "boxicons:logo-github:logos"
       plugin_name "github-pull-requests"
       title "GitHub Pull Requests"
 

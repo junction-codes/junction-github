@@ -6,7 +6,7 @@ module Junction
     class ActionsPlugin < ApplicationPlugin
       domain CorePlugin::DOMAIN
       description "GitHub Actions integration for Junction"
-      icon "github"
+      icon "boxicons:github:logos"
       plugin_name "github-actions"
       title "GitHub Actions"
 

@@ -6,7 +6,7 @@ module Junction
     class IssuesPlugin < ApplicationPlugin
       domain CorePlugin::DOMAIN
       description "GitHub Issues integration for Junction"
-      icon "github"
+      icon "boxicons:github:logos"
       plugin_name "github-issues"
       title "GitHub Issues"
 
