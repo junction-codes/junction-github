@@ -20,7 +20,7 @@ module Junction
 
         def view_template
           div(**attrs) do
-            icon("github")
+            icon("github", library: :boxicons, variant: :logos, fill: "currentColor")
             Link(href:, target: "_blank", rel: "noopener", class: "font-bold") do
               slug
             end

@@ -18,7 +18,7 @@ module Junction
 
       domain DOMAIN
       description "GitHub integration for Junction"
-      icon "github"
+      icon "boxicons:github:logos"
       plugin_name "github"
       title "GitHub"
 
@@ -28,7 +28,8 @@ module Junction
           Junction::User.find_by(annotations: { ANNOTATION_USER_LOGIN => auth.info.nickname })
         }
       else
-        Rails.logger.warn "GitHub authentication is not configured. Please set the GITHUB_KEY and GITHUB_SECRET environment variables."
+        (Rails.logger || Logger.new($stderr)).warn \
+          "GitHub authentication is not configured. Please set the GITHUB_KEY and GITHUB_SECRET environment variables."
       end
 
       %w[api component].each do |context|
